@@ -12,8 +12,11 @@ public class Hacker : MonoBehaviour
     public Estado EstadoActual;
     string password;
 
+    string playerHint = "You can type 'Menu' at any time";
+
     string[] level1passwords = {"hola", "adios", "hasta luego", "waldo", "wanchez" };
     string[] level2passwords = {"bingo bank", "aquabingo", "mardi jazz", "magic garden" };
+    string[] level3passwords = { "pink floyd", "metallica", "led zepellin", "red hot chilli peppers", "queen" };
 
      // Start is called before the first frame update
     void Start()
@@ -77,7 +80,7 @@ public class Hacker : MonoBehaviour
     {
 
 
-        bool onValidLevel = (input == "1" || input == "2");
+        bool onValidLevel = (input == "1" || input == "2" || input == "3");
             if (onValidLevel)
         {
             level = int.Parse(input);
@@ -108,7 +111,7 @@ public class Hacker : MonoBehaviour
     {
         EstadoActual = Estado.Password;
         Terminal.ClearScreen();
-        Terminal.WriteLine("Please enter your password");
+       
        
 
 
@@ -122,12 +125,18 @@ public class Hacker : MonoBehaviour
                 password = level2passwords[Random.Range(0, level2passwords.Length)];
                 break;
 
+            case 3:
+                password = level3passwords[Random.Range(0, level3passwords.Length)];
+                break;
+
+
             default: Terminal.WriteLine("Enter a valid input");
                 break;
 
         }
 
-   
+        Terminal.WriteLine("Enter your password " + password.Anagram());
+        Terminal.WriteLine(playerHint);
 
     }
 
@@ -143,7 +152,8 @@ public class Hacker : MonoBehaviour
         }
         else
         {
-            Terminal.WriteLine("Wrong Password you dreidel noob!");
+            GameStart(input);
+            //Terminal.WriteLine("Wrong Password you dreidel noob!");
 
         }
 
@@ -160,7 +170,49 @@ public class Hacker : MonoBehaviour
 
       void ShowLevelReward()
     {
-        Terminal.WriteLine("CONGRATS YOU WIN!");
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("CONGRATS YOU WIN!");
+                Terminal.WriteLine(@"
+                -----------
+               /         //
+              /         //
+             / ------- //
+            (_________(/
+                ");
+                break;
+
+            case 2:
+                Terminal.WriteLine("CONGRATS YOU WIN!");
+                Terminal.WriteLine(@"
+                -----------
+               /    gtret     //
+              /  erte       //
+             / ------- //
+            (_________(/
+
+                ");
+
+                break;
+
+
+            case 3:
+                Terminal.WriteLine("CONGRATS YOU WIN!");
+             Terminal.WriteLine(@"
+  ___________________
+   /  __________________()
+  /  /|_________________ 
+ /  /_/________________()
+/______________________
+|_____________________() 
+       ");
+                break;
+
+
+        }
+
+        
     }
 
     void Update()
