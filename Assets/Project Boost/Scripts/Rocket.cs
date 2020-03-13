@@ -8,6 +8,7 @@ public class Rocket : MonoBehaviour
 
     Rigidbody RocketRB;
     public float upspeed = 1;
+    public float rspeed = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +36,11 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
+            transform.Rotate(Vector3.forward * rspeed * Time.deltaTime);
             print("Rotating Lef");
         }else if (Input.GetKey(KeyCode.D))
         {
+            transform.Rotate(-Vector3.forward * rspeed * Time.deltaTime);
             print("Rotating Right");
 
         }
